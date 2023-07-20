@@ -1,0 +1,102 @@
+---
+title: "Week 2"
+author: "tp"
+date: "2023-07-19"
+output: html_document
+---
+
+*This text will appear in italics!*
+**This text will appear in bold!**
+
+# Primary Heading
+## Secondary Heading
+### Tertiary Heading
+
+# Unordered Lists
+- First item
+- Second item
+- Third item
+
+
+* Can also use asterisk
+* as in this list
+
+# Ordered Lists
+
+1. Or a numbered list
+2. Like so
+6. And the numbering
+3. Doesn't need to be in order
+
+# Links
+
+[Johns Hopkins](https://publichealth.jhu.edu/)
+
+[RStudio](https://posit.co/)
+
+Here I can add links to [R bloggers][1] and [Simply Statistics][2]!
+
+[1]:https://www.r-bloggers.com/ "R bloggers"
+[2]:https://simplystatistics.org/ "Simply Statistics"
+
+New lines Require a double space after the end of a line  
+Like so
+
+
+Here is a code chunk where the code will be hidden, only result will show
+```{r simulation, echo = FALSE}
+set.seed(1)
+x <- rnorm(100)
+mean(x)
+```
+
+Here i will name the code chunk and create vars to populate within a sentence
+```{r computetime, echo=F}
+time <- format(Sys.time(), "%a %b %d %X %Y")
+rand <- rnorm(1)
+```
+
+The current time is `r time`. My favorite random number is `r rand`.
+
+
+## Now lets incorporate some graphics. First we will sim some data
+```{r simdata, echo=T}
+x <- rnorm(100); y <- x + rnorm(100, sd = 0.5)
+```
+
+## Here is a scatter plot of the data
+```{r scatterplot, fig.height=4}
+par(mar = c(5,4,1,1), las=1)
+plot(x,y, main = "My Sim Data")
+```
+
+
+## Making Tables
+
+```{r fitmodel}
+fit <- lm(Ozone ~ Wind + Solar.R + Temp, data = airquality)
+```
+
+```{r showtable, results="asis"}
+library(xtable)
+xt <- xtable(summary(fit))
+print(xt, type = "html")
+```
+
+
+## Setting global options
+
+```{r setoptions, echo=F}
+library(knitr)
+opts_chunk$set(echo = FALSE, results = "hide")
+```
+
+## cache = TRUE
+After first run, results are loaded from cache, use cache=TRUE  
+This is helpful for code chunks that take a long time to run  
+
+
+
+
+
+
